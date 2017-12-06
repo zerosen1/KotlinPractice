@@ -49,37 +49,35 @@ class WebController {
     }
 
     @PutMapping("/put/{id}")
-    fun putCustomer(@PathVariable id: Long, @RequestBody customer: Customer): String {
+    fun putCustomer(@RequestBody customer: Customer): String {
         // reset customer.Id
-        customer.id = id;
+
         Query.resultset()
         var storage2 = Query.resultset()
-        println(storage2.get(id))
-        if (storage2.get(id) != null) {
             Query.Put(customer)
-        } else {
-//            customer.id = id
-//            storage2.put(id, customer)
-        }
         return "Put Sucessfully!"
     }
-/*
+
     @DeleteMapping("/delete/{id}")
     fun deleteMethod(@PathVariable id: Long): String
     {
-        return "Done!"
-    }
-*/
+    try{
 
-    @DeleteMapping("/delete/{id}")
-    fun deleteMethodX(@PathVariable id: Long): ResponseEntity<Unit> {
-        try {
-         //   if (dogRepository.exists(id)) {
-         //       dogRepository.delete(id)
-                return ResponseEntity.ok().build()
-         //   } else {
-           //     return ResponseEntity.notFound().build()
-            //}
-        } catch (e: Exception) { return ResponseEntity.notFound().build() }
     }
+        return "Done!"
+
+    }
+
+
+//    @DeleteMapping("/delete")
+//    fun deleteMethodX(@PathVariable id: Long): ResponseEntity<Unit> {
+//        try {
+//         //   if (dogRepository.exists(id)) {
+//         //       dogRepository.delete(id)
+//                return ResponseEntity.ok().build()
+//         //   } else {
+//           //     return ResponseEntity.notFound().build()
+//            //}
+//        } catch (e: Exception) { return ResponseEntity.notFound().build() }
+//    }
 }

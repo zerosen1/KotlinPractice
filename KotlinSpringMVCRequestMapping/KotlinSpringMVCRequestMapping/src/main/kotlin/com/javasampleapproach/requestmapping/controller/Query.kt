@@ -79,7 +79,19 @@ object Query{
     }
         return "Put failed"
 }
-
+    fun Delete(string:String):String {
+        try {
+            val sql = "DELETE FROM "+ Table+ " WHERE NRIC = "+ string
+            println(sql)
+            stmt?.executeUpdate(sql)
+            return "PUT SUCESSFUL $string"
+        } catch (ex: SQLException) {
+            ex.printStackTrace()
+        } catch (ex: Exception) {
+            ex.printStackTrace()
+        }
+        return "Put failed"
+    }
 
 
 
