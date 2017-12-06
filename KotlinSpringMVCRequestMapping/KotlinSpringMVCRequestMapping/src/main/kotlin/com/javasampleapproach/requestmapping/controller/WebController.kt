@@ -22,7 +22,7 @@ class WebController {
         DatabaseConnection.setIP("127.0.0.1")
         DatabaseConnection.setPort("3306")
         DatabaseConnection.setDB("EMP")
-        DatabaseConnection.SetCredentials("root", "123456")
+        DatabaseConnection.SetCredentials("root", "1234")
         DatabaseConnection.OpenConnection()
     }
 
@@ -42,12 +42,12 @@ class WebController {
         return Query.Put(customer)
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/delete")
     fun deleteMethod(@PathVariable id: Long): String
     {
 
-
     return "haha"
+
 
     }
 
