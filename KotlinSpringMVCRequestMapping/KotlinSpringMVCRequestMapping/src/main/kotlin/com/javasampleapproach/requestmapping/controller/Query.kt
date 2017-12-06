@@ -9,7 +9,7 @@ import com.javasampleapproach.requestmapping.model.Customer
 
 
 object Query{
-
+    var storage1 = mutableMapOf<Long, Customer>()
     var Table: String = "insurancedb"
 //    fun CSVInsert() {
 //        try {
@@ -34,7 +34,7 @@ object Query{
         }
     }
 
-    fun resultset() {
+    fun resultset():mutableMapOf<Long, Customer> {
         try{
             var c=WebController()
         var resultset: ResultSet? = null
@@ -57,6 +57,8 @@ object Query{
                 val eLOGActive = resultset.getInt("eLOGActive")
                 storage1.put(i, Customer(i,NRIC,FirstName,MiddleName, LastName,DateOfBirth,PolicyID,PolicyAmount,PolicyExpiry, eLOGActive))
     ++i
+
+                return storage1
                 //Display values
 //                System.out.print("NRIC: " + NRIC)
 //                System.out.print(", FirstName: " + FirstName)

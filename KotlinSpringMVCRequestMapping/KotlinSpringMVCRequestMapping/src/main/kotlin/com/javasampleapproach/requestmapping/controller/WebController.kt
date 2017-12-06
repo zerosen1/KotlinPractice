@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 import javax.annotation.PostConstruct
-var storage1 = mutableMapOf<Long, Customer>()
+
 @RestController
 @RequestMapping(value="/api/customer")
 class WebController {
@@ -31,9 +31,9 @@ class WebController {
 
     @GetMapping("/")
     fun getAll(): MutableMap<Long, Customer> {
-        Query.resultset()
 
-        return storage1
+
+        return Query.resultset()
     }
 
     @GetMapping("/get")
