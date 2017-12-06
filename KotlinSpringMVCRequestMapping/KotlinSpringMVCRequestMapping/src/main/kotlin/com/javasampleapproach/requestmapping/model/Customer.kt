@@ -13,4 +13,6 @@ data class Customer(
 		var policyExpiry: String ="",
 		var eLogActive: Int=0
 
-)
+){
+    override fun toString(): String = "("+"'"+nric+"'"+"," + "'"+firstName+"'"+","+"'"+middleName+"'"+","+"'"+lastName+"'"+","+"'"+dateOfBirth+"'"+","+"'"+policyID+"'"+","+"'"+policyAmount+"'"+","+"'"+policyExpiry+"'"+","+"'"+eLogActive+"'"+")"
+}
