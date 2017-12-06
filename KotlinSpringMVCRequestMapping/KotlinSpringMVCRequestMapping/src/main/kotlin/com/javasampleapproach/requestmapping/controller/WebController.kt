@@ -11,71 +11,77 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 import javax.annotation.PostConstruct
-
-
+var storage1 = mutableMapOf<Long, Customer>()
 @RestController
 @RequestMapping(value="/api/customer")
 class WebController {
-	// Define a customer storage
-	val custStores = mutableMapOf<Long, Customer>()
-	
-	@PostConstruct
-    fun initial()
+    // Define a customer storage
+    val custStores = mutableMapOf<Long, Customer>()
 
-	{
-		custStores.put(1, Customer(1,"S1234567J","Darren","nil","Koh","10 Feb 1993","123",100.0F,"11 Feb 2017",true))
-		custStores.put(2, Customer(2,"S1234567J","Kenji","nil","Sato","11 Feb 1993","1234",102.0F,"12 Feb 2017",false))
-
-	}
-	
-	@GetMapping("/")
-    fun getAll(): MutableMap<Long, Customer>{
-		println("########### GET All Customers: ${custStores}")
-		return custStores
+    @PostConstruct
+    fun initial ()
+    {
     }
-	
-	@GetMapping("/get")
-    fun getCustomer(@RequestParam("id") id: Long): Customer{
-		val cust = custStores.getValue(id);
 
-		return cust
+    @GetMapping("/")
+    fun getAll(): MutableMap <Long, Customer>
+    {
+        DatabaseConnection.setIP("127.0.0.1")
+        DatabaseConnection.setPort("3306")
+        DatabaseConnection.setDB("EMP")
+        DatabaseConnection.SetCredentials("root" ,"123456")
+        DatabaseConnection.OpenConnection()
+        Query.resultset()
+        DatabaseConnection.CloseConnection()
+        return storage1
     }
- 
+
+    @GetMapping("/get")
+    fun getCustomer(@RequestParam("id") id: Long): Customer
+    {
+
+        val cust = custStores.getValue(id);
+        return cust
+    }
+
     @PostMapping("/post")
-    fun postCustomer(@RequestBody customer: Customer): String{
-		// do post
-//        DatabaseConnection.OpenConnection()
-        var x = "('S9328106E','Kenji','jon','Sato','1993-08-05','fe8218u','18.2','2018-05-31','1')"
-//        Query.Insert(x)
-//        DatabaseConnection.CloseConnection()
-		custStores.put(customer.id, customer)
-		
+    fun postCustomer(@RequestBody customer: Customer): Customer?
+    {
+        DatabaseConnection.setIP("127.0.0.1")
+        DatabaseConnection.setPort("3306")
+        DatabaseConnection.setDB("EMP")
+        DatabaseConnection.SetCredentials("root" ,"123456")
+		var x="("+"'"+customer.nric+"'"+"," + "'"+customer.firstName+"'"+","+"'"+customer.middleName+"'"+","+"'"+customer.lastName+"'"+","+"'"+customer.dateOfBirth+"'"+","+"'"+customer.policyID+"'"+","+"'"+customer.policyAmount+"'"+","+"'"+customer.policyExpiry+"'"+","+"'"+customer.eLogActive+"'"+")"
+    DatabaseConnection.OpenConnection()
+    Query.Insert(x)
+	DatabaseConnection.CloseConnection()
+        println("insertdone")
 
+        return custStores.put(customer.id, customer)
 
-		
-        return "Post Sucessfully!"
     }
- 
+
     @PutMapping("/put/{id}")
-    fun putCustomer(@PathVariable id: Long, @RequestBody customer: Customer): String{
-		// reset customer.Id
-		customer.id = id;
-		
-		if(custStores.get(id) != null){
-			custStores.replace(id, customer)
-		}else{
-			customer.id = id
-			custStores.put(id, customer)
-		}
-		
+    fun putCustomer(@PathVariable id: Long, @RequestBody customer: Customer): String
+    {
+        // reset customer.Id
+        customer.id = id;
 
-		return "Put Sucessfully!"
+        if(custStores.get(id) != null)
+        {
+            custStores.replace(id, customer)
+        }
+        else
+        {
+            customer.id = id
+            custStores.put(id, customer)
+        }
+        return "Put Sucessfully!"
     }
- 
-    @DeleteMapping("/delete/{id}")
-    fun deleteMethod(@PathVariable id: Long): String {
-	
 
-		return "Done!"
+    @DeleteMapping("/delete/{id}")
+    fun deleteMethod(@PathVariable id: Long): String
+    {
+        return "Done!"
     }
 }
