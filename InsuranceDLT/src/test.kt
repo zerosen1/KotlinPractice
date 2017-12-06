@@ -15,9 +15,9 @@ object test {
 
     DatabaseConnection.OpenConnection()
 //    readCsvFileKotlin("C:\\Users\\kenji.a.sato\\Desktop\\insurancedb.csv")
-        Query.CSVInsert()
-//        Query.resultset()
-
+//        Query.CSVInsert()
+        Query.resultset()
+//    executeMySQLQuery()
     DatabaseConnection.CloseConnection()
 
         // make a connection to MySQL Server

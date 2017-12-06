@@ -53,7 +53,27 @@ object Query{
     } catch (ex: Exception) {
         // handle any errors
         ex.printStackTrace()
-    }}}
+    }}
+    fun query(){
+        try {
+
+        } catch (ex: SQLException) {
+            ex.printStackTrace()
+        } catch (ex: Exception) {
+            ex.printStackTrace()
+        }
+    }
+
+    fun Insert2(){
+        val sql = "INSERT INTO "+ Table+ " VALUES"+ readCsvFileKotlin("C:\\Users\\kenji.a.sato\\Desktop\\insurancedb.csv")
+        stmt?.executeUpdate(sql)
+        println("insertsucess")
+    }
+
+
+
+
+}
 
 
 
