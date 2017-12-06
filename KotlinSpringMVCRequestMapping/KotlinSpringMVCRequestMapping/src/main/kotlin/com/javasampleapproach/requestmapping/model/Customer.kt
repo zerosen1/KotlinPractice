@@ -11,6 +11,6 @@ data class Customer(
 		var policyID: String ="",
 		var policyAmount: Float=0.0f,
 		var policyExpiry: String ="",
-		var eLogActive: Boolean=false
+		var eLogActive: Int=0
 
 )

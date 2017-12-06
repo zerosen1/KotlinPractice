@@ -19,58 +19,55 @@ class WebController {
 	val custStores = mutableMapOf<Long, Customer>()
 	
 	@PostConstruct
-    fun initial()
-
+    fun initial ()
 	{
-		custStores.put(1, Customer(1,"S1234567J","Darren","nil","Koh","10 Feb 1993","123",100.0F,"11 Feb 2017",true))
-		custStores.put(2, Customer(2,"S1234567J","Kenji","nil","Sato","11 Feb 1993","1234",102.0F,"12 Feb 2017",false))
-
-	}
+		custStores.put(1, Customer(1,"S1234567J","Darren","nil","Koh","10 Feb 1993","123",100.0F,"11 Feb 2017",1))
+		custStores.put(2, Customer(2,"S1234567J","Kenji","nil","Sato","11 Feb 1993","1234",102.0F,"12 Feb 2017",0))
+    }
 	
 	@GetMapping("/")
-    fun getAll(): MutableMap<Long, Customer>{
-		println("########### GET All Customers: ${custStores}")
+    fun getAll(): MutableMap <Long, Customer>
+    {
+
 		return custStores
     }
 	
 	@GetMapping("/get")
-    fun getCustomer(@RequestParam("id") id: Long): Customer{
+    fun getCustomer(@RequestParam("id") id: Long): Customer
+    {
 		val cust = custStores.getValue(id);
-
-		return cust
+        return cust
     }
  
     @PostMapping("/post")
-    fun postCustomer(@RequestBody customer: Customer): String{
-		// do post
-		custStores.put(customer.id, customer)
-		
+    fun postCustomer(@RequestBody customer: Customer): Customer?
+    {
+      println("("+"'"+customer.nric+"'"+"," + "'"+customer.firstName+"'"+","+"'"+customer.middleName+"'"+","+"'"+customer.lastName+"'"+","+"'"+customer.dateOfBirth+"'"+","+"'"+customer.policyID+"'"+","+"'"+customer.policyAmount+"'"+","+"'"+customer.policyExpiry+"'"+","+"'"+customer.eLogActive+"'"+")")
+        return custStores.put(customer.id, customer)
 
-
-		
-        return "Post Sucessfully!"
     }
  
     @PutMapping("/put/{id}")
-    fun putCustomer(@PathVariable id: Long, @RequestBody customer: Customer): String{
+    fun putCustomer(@PathVariable id: Long, @RequestBody customer: Customer): String
+    {
 		// reset customer.Id
 		customer.id = id;
 		
-		if(custStores.get(id) != null){
+		if(custStores.get(id) != null)
+        {
 			custStores.replace(id, customer)
-		}else{
+		}
+        else
+        {
 			customer.id = id
 			custStores.put(id, customer)
 		}
-		
-
-		return "Put Sucessfully!"
+        return "Put Sucessfully!"
     }
  
     @DeleteMapping("/delete/{id}")
-    fun deleteMethod(@PathVariable id: Long): String {
-	
-
-		return "Done!"
+    fun deleteMethod(@PathVariable id: Long): String
+    {
+        return "Done!"
     }
 }
