@@ -49,22 +49,19 @@ class WebController {
     }
 
     @PutMapping("/put/{id}")
-    fun putCustomer(@RequestBody customer: Customer): String {
-        // reset customer.Id
+    fun putCustomer(@RequestBody customer: Customer): Customer {
 
-        Query.resultset()
-        var storage2 = Query.resultset()
-            Query.Put(customer)
-        return "Put Sucessfully!"
+
+        return Query.Put(customer)
     }
 
     @DeleteMapping("/delete/{id}")
     fun deleteMethod(@PathVariable id: Long): String
     {
-    try{
 
-    }
-        return "Done!"
+
+
+    return "haha"
 
     }
 

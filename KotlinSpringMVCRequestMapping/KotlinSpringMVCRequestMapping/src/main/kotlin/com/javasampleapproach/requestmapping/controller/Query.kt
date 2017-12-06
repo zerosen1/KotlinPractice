@@ -66,18 +66,18 @@ object Query{
         return storage1
         }
 
-    fun Put(customer:Customer):String {
+    fun Put(customer:Customer):Customer {
         try {
         val sql = "REPLACE INTO "+ Table+ " VALUES"+ customer
             println(sql)
         stmt?.executeUpdate(sql)
-        return "PUT SUCESSFUL $customer"
+        return customer
     } catch (ex: SQLException) {
         ex.printStackTrace()
     } catch (ex: Exception) {
         ex.printStackTrace()
     }
-        return "Put failed"
+        return customer
 }
     fun Delete(string:String):String {
         try {
