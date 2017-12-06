@@ -7,7 +7,7 @@ fun main(args: Array<String>) {
             .map { it.toUpperCase() }
             .forEach { println(it) }
 
-    println(b(1).a(5).i())
+//    println(b(1).a(5).i())
 }
 class b(val y:Int) {
      inner class a(var x: Int) {

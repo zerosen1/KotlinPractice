@@ -17,6 +17,5 @@ fun main(args: Array<String>) {
         override var x:Int=3
     fun f( x : String) : String = "{$x abcd}"
     }
-
     println(Bar().f())
 }
