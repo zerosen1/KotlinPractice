@@ -18,7 +18,6 @@ import javax.annotation.PostConstruct
 class WebController {
 
     // Define a customer storage
-    val custStores = mutableMapOf<Long, Customer>()
 
     @PostConstruct
     fun initial() {
@@ -31,38 +30,36 @@ class WebController {
 
     @GetMapping("/")
     fun getAll(): MutableMap<Long, Customer> {
-
-
         return Query.resultset()
     }
 
-    @GetMapping("/get")
-    fun getCustomer(@RequestParam("id") id: Long): Customer {
-        val cust = custStores.getValue(id);
-
-        return cust
-    }
+//    @GetMapping("/get")
+//    fun getCustomer(@RequestParam("id") id: Long): Customer {
+//        val cust = custStores.getValue(id);
+//
+//        return cust
+//    }
 
     @PostMapping("/post")
-    fun postCustomer(@RequestBody customer: Customer): Customer? {
+    fun postCustomer(@RequestBody customer: Customer): String{
 
-        var x = customer.toString();
+        var x = customer.toString()
         Query.Insert(x)
-        println(x)
-        return custStores.put(customer.id, customer)
+        return x
     }
 
     @PutMapping("/put/{id}")
     fun putCustomer(@PathVariable id: Long, @RequestBody customer: Customer): String {
-
         // reset customer.Id
         customer.id = id;
+        Query.resultset()
+        var storage2 = mutableMapOf<Long, Customer>()
+        if (storage2.get(id) != null) {
 
-        if (custStores.get(id) != null) {
-            custStores.replace(id, customer)
+            storage2.replace(id, customer)
         } else {
             customer.id = id
-            custStores.put(id, customer)
+//            storage2.put(id, customer)
         }
         return "Put Sucessfully!"
     }
