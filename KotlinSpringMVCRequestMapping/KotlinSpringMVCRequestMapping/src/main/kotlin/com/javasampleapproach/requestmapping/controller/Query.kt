@@ -36,7 +36,6 @@ object Query{
 
     fun resultset():MutableMap<Long, Customer> {
         try {
-            var c = WebController()
             var resultset: ResultSet? = null
             var sql = "SELECT * FROM $Table"
             resultset = stmt!!.executeQuery(sql)
@@ -80,18 +79,18 @@ object Query{
     }
         return customer
 }
-    fun Delete(customer: Customer): Customer {
+    fun Delete(nric:String): String {
         try {
-            val sql = "DELETE FROM "+ Table+ " WHERE NRIC = "+ customer.toString()
+            val sql = "DELETE FROM "+ Table+ " WHERE NRIC = "+ nric
             println(sql)
             stmt?.executeUpdate(sql)
-            return customer
+            return nric
         } catch (ex: SQLException) {
             ex.printStackTrace()
         } catch (ex: Exception) {
             ex.printStackTrace()
         }
-        return customer
+        return nric
     }
 
 

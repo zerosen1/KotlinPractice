@@ -22,7 +22,7 @@ class WebController {
         DatabaseConnection.setIP("127.0.0.1")
         DatabaseConnection.setPort("3306")
         DatabaseConnection.setDB("EMP")
-        DatabaseConnection.SetCredentials("root", "1234")
+        DatabaseConnection.SetCredentials("root", "123456")
         DatabaseConnection.OpenConnection()
     }
 
@@ -33,22 +33,24 @@ class WebController {
 
     @PostMapping("/post")
     fun postCustomer(@RequestBody customer: Customer): Customer{
-        return Query.Delete(customer)
-//        return Query.Insert(customer)
+        return Query.Insert(customer)
     }
 
-    @PutMapping("/put/{id}")
+    @PutMapping("/put")
     fun putCustomer(@RequestBody customer: Customer): Customer {
-        return Query.Put(customer)
+        try {
+               if (customer!=null) {
+            return Query.Put(customer)
+               } else {throw IllegalArgumentException("IPAddress Invalid: Please Check")}
+        } catch (e: Exception) { return Query.Put(customer)}
+    return Query.Put(customer)
     }
 
     @DeleteMapping("/delete")
-    fun deleteMethod(@PathVariable id: Long): String
-    {
-
-    return "haha"
-
-
+    fun deleteMethod(@RequestBody customer: Customer): String {
+        var nric= customer.nric
+        println(nric)
+        return Query.Delete(nric)
     }
 
 //    @GetMapping("/get")
@@ -60,12 +62,12 @@ class WebController {
 //    @DeleteMapping("/delete")
 //    fun deleteMethodX(@PathVariable id: Long): ResponseEntity<Unit> {
 //        try {
-//         //   if (dogRepository.exists(id)) {
-//         //       dogRepository.delete(id)
+         //   if (dogRepository.exists(id)) {
+         //       dogRepository.delete(id)
 //                return ResponseEntity.ok().build()
-//         //   } else {
-//           //     return ResponseEntity.notFound().build()
-//            //}
+         //   } else {
+           //     return ResponseEntity.notFound().build()
+            //}
 //        } catch (e: Exception) { return ResponseEntity.notFound().build() }
 //    }
 }
