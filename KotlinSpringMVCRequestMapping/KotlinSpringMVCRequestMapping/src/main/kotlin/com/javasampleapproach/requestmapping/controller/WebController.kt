@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 import javax.annotation.PostConstruct
 
+
 @RestController
 @RequestMapping(value="/api/customer")
 class WebController {
@@ -43,6 +44,10 @@ class WebController {
     @PostMapping("/post")
     fun postCustomer(@RequestBody customer: Customer): String{
 		// do post
+//        DatabaseConnection.OpenConnection()
+        var x = "('S9328106E','Kenji','jon','Sato','1993-08-05','fe8218u','18.2','2018-05-31','1')"
+//        Query.Insert(x)
+//        DatabaseConnection.CloseConnection()
 		custStores.put(customer.id, customer)
 		
 

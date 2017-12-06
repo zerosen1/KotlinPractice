@@ -11,7 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 import javax.annotation.PostConstruct
-
+DatabaseConnection.setIP("127.0.0.1")
+DatabaseConnection.setPort("3306")
+DatabaseConnection.setDB("EMP")
+DatabaseConnection.SetCredentials("root" ,"123456")
 @RestController
 @RequestMapping(value="/api/customer")
 class WebController {
@@ -44,6 +47,10 @@ class WebController {
     {
 		// do post
 		custStores.put(customer.id, customer)
+        DatabaseConnection.OpenConnection()
+        Query.Insert()
+        DatabaseConnection.CloseConnection()
+
         return "Post Sucessfully!"
     }
  
