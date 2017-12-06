@@ -15,38 +15,36 @@ var storage1 = mutableMapOf<Long, Customer>()
 @RestController
 @RequestMapping(value="/api/customer")
 class WebController {
+
     // Define a customer storage
     val custStores = mutableMapOf<Long, Customer>()
 
-    @PostConstruct
+	@PostConstruct
     fun initial ()
-    {
+	{
+		custStores.put(1, Customer(1,"S1234567J","Darren","nil","Koh","10 Feb 1993","123",100.0F,"11 Feb 2017",1))
+		custStores.put(2, Customer(2,"S1234567J","Kenji","nil","Sato","11 Feb 1993","1234",102.0F,"12 Feb 2017",0))
     }
-
-    @GetMapping("/")
+	
+	@GetMapping("/")
     fun getAll(): MutableMap <Long, Customer>
     {
-        DatabaseConnection.setIP("127.0.0.1")
-        DatabaseConnection.setPort("3306")
-        DatabaseConnection.setDB("EMP")
-        DatabaseConnection.SetCredentials("root" ,"123456")
-        DatabaseConnection.OpenConnection()
-        Query.resultset()
-        DatabaseConnection.CloseConnection()
-        return storage1
-    }
 
-    @GetMapping("/get")
+		return custStores
+    }
+	
+	@GetMapping("/get")
     fun getCustomer(@RequestParam("id") id: Long): Customer
     {
+		val cust = custStores.getValue(id);
 
-        val cust = custStores.getValue(id);
         return cust
     }
 
     @PostMapping("/post")
     fun postCustomer(@RequestBody customer: Customer): Customer?
     {
+
         DatabaseConnection.setIP("127.0.0.1")
         DatabaseConnection.setPort("3306")
         DatabaseConnection.setDB("EMP")
@@ -57,6 +55,9 @@ class WebController {
 	DatabaseConnection.CloseConnection()
         println("insertdone")
 
+
+      println("("+"'"+customer.nric+"'"+"," + "'"+customer.firstName+"'"+","+"'"+customer.middleName+"'"+","+"'"+customer.lastName+"'"+","+"'"+customer.dateOfBirth+"'"+","+"'"+customer.policyID+"'"+","+"'"+customer.policyAmount+"'"+","+"'"+customer.policyExpiry+"'"+","+"'"+customer.eLogActive+"'"+")")
+
         return custStores.put(customer.id, customer)
 
     }
@@ -64,6 +65,7 @@ class WebController {
     @PutMapping("/put/{id}")
     fun putCustomer(@PathVariable id: Long, @RequestBody customer: Customer): String
     {
+
         // reset customer.Id
         customer.id = id;
 
@@ -84,4 +86,5 @@ class WebController {
     {
         return "Done!"
     }
-}
+
+    }
