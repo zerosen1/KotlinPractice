@@ -53,12 +53,12 @@ class WebController {
         // reset customer.Id
         customer.id = id;
         Query.resultset()
-        var storage2 = mutableMapOf<Long, Customer>()
+        var storage2 = Query.resultset()
+        println(storage2.get(id))
         if (storage2.get(id) != null) {
-
-            storage2.replace(id, customer)
+            Query.Put(customer)
         } else {
-            customer.id = id
+//            customer.id = id
 //            storage2.put(id, customer)
         }
         return "Put Sucessfully!"

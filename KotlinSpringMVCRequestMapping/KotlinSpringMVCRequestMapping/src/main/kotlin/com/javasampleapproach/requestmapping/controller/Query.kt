@@ -56,16 +56,7 @@ object Query{
                 val eLOGActive = resultset.getInt("eLOGActive")
                 storage1.put(i, Customer(i, NRIC, FirstName, MiddleName, LastName, DateOfBirth, PolicyID, PolicyAmount, PolicyExpiry, eLOGActive))
                 ++i
-                //Display values
-//                System.out.print("NRIC: " + NRIC)
-//                System.out.print(", FirstName: " + FirstName)
-//                System.out.print(", MiddleName: " + MiddleName)
-//                System.out.print(", LastName: " + LastName)
-//                System.out.print(", DateOfBirth: " + DateOfBirth)
-//                System.out.print(", PolicyID: " + PolicyID)
-//                System.out.print(", PolicyAmount: " + PolicyAmount)
-//                System.out.print(", PolicyExpiry: " + PolicyExpiry)
-//                System.out.println(", eLOGActive: " + eLOGActive)
+
             }
         } catch (ex: SQLException) {
             ex.printStackTrace()
@@ -74,6 +65,24 @@ object Query{
         }
         return storage1
         }
+
+    fun Put(customer:Customer):String {
+        try {
+        val sql = "REPLACE INTO "+ Table+ " VALUES"+ customer
+            println(sql)
+        stmt?.executeUpdate(sql)
+        return "PUT SUCESSFUL $customer"
+    } catch (ex: SQLException) {
+        ex.printStackTrace()
+    } catch (ex: Exception) {
+        ex.printStackTrace()
+    }
+        return "Put failed"
+}
+
+
+
+
 
 //        fun query() {
 //            try {
