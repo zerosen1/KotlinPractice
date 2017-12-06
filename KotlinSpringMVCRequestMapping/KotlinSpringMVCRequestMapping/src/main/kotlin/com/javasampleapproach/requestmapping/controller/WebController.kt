@@ -17,8 +17,6 @@ import javax.annotation.PostConstruct
 @RequestMapping(value="/api/customer")
 class WebController {
 
-    // Define a customer storage
-
     @PostConstruct
     fun initial() {
         DatabaseConnection.setIP("127.0.0.1")
@@ -33,25 +31,14 @@ class WebController {
         return Query.resultset()
     }
 
-//    @GetMapping("/get")
-//    fun getCustomer(@RequestParam("id") id: Long): Customer {
-//        val cust = custStores.getValue(id);
-//
-//        return cust
-//    }
-
     @PostMapping("/post")
-    fun postCustomer(@RequestBody customer: Customer): String{
-
-        var x = customer.toString()
-        Query.Insert(x)
-        return x
+    fun postCustomer(@RequestBody customer: Customer): Customer{
+        return Query.Delete(customer)
+//        return Query.Insert(customer)
     }
 
     @PutMapping("/put/{id}")
     fun putCustomer(@RequestBody customer: Customer): Customer {
-
-
         return Query.Put(customer)
     }
 
@@ -60,12 +47,16 @@ class WebController {
     {
 
 
-
     return "haha"
 
     }
 
-
+//    @GetMapping("/get")
+//    fun getCustomer(@RequestParam("id") id: Long): Customer {
+//        val cust = custStores.getValue(id);
+//
+//        return cust
+//    }
 //    @DeleteMapping("/delete")
 //    fun deleteMethodX(@PathVariable id: Long): ResponseEntity<Unit> {
 //        try {

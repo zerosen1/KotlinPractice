@@ -21,16 +21,17 @@ object Query{
 //            ex.printStackTrace()
 //        }
 //    }
-    fun Insert(details:String) {
+    fun Insert(customer: Customer): Customer {
         try {
-            val sql = "INSERT INTO "+ Table+ " VALUES"+ details
+            val sql = "INSERT INTO "+ Table+ " VALUES"+ customer.toString()
             stmt?.executeUpdate(sql)
-            println("insertsucess")
+            return customer
         } catch (ex: SQLException) {
             ex.printStackTrace()
         } catch (ex: Exception) {
             ex.printStackTrace()
         }
+    return customer
     }
 
     fun resultset():MutableMap<Long, Customer> {
@@ -79,18 +80,18 @@ object Query{
     }
         return customer
 }
-    fun Delete(string:String):String {
+    fun Delete(customer: Customer): Customer {
         try {
-            val sql = "DELETE FROM "+ Table+ " WHERE NRIC = "+ string
+            val sql = "DELETE FROM "+ Table+ " WHERE NRIC = "+ customer.toString()
             println(sql)
             stmt?.executeUpdate(sql)
-            return "PUT SUCESSFUL $string"
+            return customer
         } catch (ex: SQLException) {
             ex.printStackTrace()
         } catch (ex: Exception) {
             ex.printStackTrace()
         }
-        return "Put failed"
+        return customer
     }
 
 
