@@ -76,7 +76,7 @@ object Query{
         }
 
 //        fun query() {
-//            try {
+//            try { 
 //
 //            } catch (ex: SQLException) {
 //                ex.printStackTrace()
