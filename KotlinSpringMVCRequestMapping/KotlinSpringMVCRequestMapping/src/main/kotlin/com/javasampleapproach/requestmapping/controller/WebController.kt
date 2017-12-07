@@ -48,9 +48,7 @@ class WebController {
 
     @DeleteMapping("/delete")
     fun deleteMethod(@RequestBody customer: Customer): String {
-        var nric= customer.nric
-        println(nric)
-        return Query.Delete(nric)
+        return Query.Delete(customer.nric)
     }
 
 //    @GetMapping("/get")

@@ -8,7 +8,7 @@ import com.javasampleapproach.requestmapping.model.Customer
 
 
 object Query{
-    var storage1 = mutableMapOf<Long, Customer>()
+
     var Table: String = "insurancedb"
 //    fun CSVInsert() {
 //        try {
@@ -35,6 +35,7 @@ object Query{
     }
 
     fun resultset():MutableMap<Long, Customer> {
+        var storage1 = mutableMapOf<Long, Customer>()
         try {
             var resultset: ResultSet? = null
             var sql = "SELECT * FROM $Table"
@@ -42,6 +43,7 @@ object Query{
             if (stmt!!.execute(sql)) {
                 resultset = stmt!!.resultSet
             }
+
             var i: Long = 1
             while (resultset!!.next()) {
                 //Retrieve by column name
@@ -68,7 +70,7 @@ object Query{
 
     fun Put(customer:Customer):Customer {
         try {
-        val sql = "REPLACE INTO "+ Table+ " VALUES"+ customer
+        val sql = "REPLACE INTO "+ Table+ " VALUES "+ customer
             println(sql)
         stmt?.executeUpdate(sql)
         return customer
@@ -81,7 +83,7 @@ object Query{
 }
     fun Delete(nric:String): String {
         try {
-            val sql = "DELETE FROM "+ Table+ " WHERE NRIC = "+ nric
+            val sql = "DELETE FROM "+ Table+ " WHERE NRIC = '"+ nric+"'"
             println(sql)
             stmt?.executeUpdate(sql)
             return nric
